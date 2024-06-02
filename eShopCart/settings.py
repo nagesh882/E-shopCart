@@ -82,6 +82,20 @@ DATABASES = {
 }
 
 
+# I use MySQL Database for this project
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'eShopCart',
+#         'USER': 'yash',
+#         'PASSWORD': 'Pass@123',
+#         'HOST': 'localhost',  # Set to 'localhost' or the IP address of your MySQL server
+#         'PORT': '3306',                # Default MySQL port
+#     }
+# }
+
+
+
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
