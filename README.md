@@ -1,2 +1,2 @@
 # E-shopCart
--* New E-shpCart Website Project
+- New E-shpCart Website Project
