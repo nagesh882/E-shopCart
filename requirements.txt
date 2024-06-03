@@ -1,0 +1,38 @@
+1. category app =>
+class category =>
+fields =>
+category id (every time write)
+category name (unique)
+slug (unique)
+description
+category image
+
+
+2. account app =>
+create custom user model
+class account =>
+fields =>
+first name
+last name
+username (unique)
+email (unique)
+phone number
+date joined
+last login
+is admin
+is staff
+is admin
+is superuser
+
+** login with email instead of username (Important)
+** required fields username, first name and last name
+** give permissions to account users (has_perm, has_module_perms)
+** create superadmin model (account manager)
+** register AUTH_USER_MODEL in settigns file
+
+
+3. make password field as read only and it not be changeable
+** achive by this django class django.contrib.auth.admin.UserAdmin
+
+
+4. configure Media Files and their Roots
