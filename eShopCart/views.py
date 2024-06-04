@@ -9,4 +9,6 @@ def homePage(request):
         "products": products    
     }
 
+    print(f"Product Names: {[ product.product_name for product in products ]}")
+
     return render(request, "homePage.html", context)
