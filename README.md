@@ -8,26 +8,26 @@
 - The project encompasses features such as user authentication, product browsing, shopping cart functionality, order management, and checkout processes. It's a comprehensive solution for setting up and managing an online store.
 
 # Tech Stack:
-## Frontend Technologies:
+## Frontend:
 - HTML5
 - CSS3
 - JavaScript
 - BootStrap
 - React
 
-## Mobile Technologies:
+## Mobile:
 - HTML5
 - CSS3
 - JavaScript
 - React Native
 
-## Backend Technologies:
+## Backend:
 - Python
 - Django Framework
 - Django Rest Framework
 - Rest API
 
-## Database Technologies:
+## Database:
 - SQL
 - SQLite3
 - MySQL
