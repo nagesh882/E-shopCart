@@ -4,6 +4,6 @@ from store import views
 
 urlpatterns = [
     
-    path('', views.storePage, name="storePage"),
-
+    path('', views.storePage, name='storePage'),
+    path('<slug:category_slug>/', views.storePage, name='products_by_category'),
 ]

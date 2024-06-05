@@ -1,13 +1,25 @@
 from django.shortcuts import render
 from store.models import Product
+from category.models import Category
 # Create your views here.
 
 
-def storePage(request):
+def storePage(request, category_slug=None):
 
-    products = Product.objects.all().filter(is_availabel=True)
+    categories = None
+    products = None
 
-    product_count = products.count()
+    if category_slug != None:
+        categories = Category.objects.get(category_slug=category_slug)
+        
+        products = Product.objects.filter(category=categories, is_availabel=True)
+
+        product_count = products.count()
+        
+    else:
+        products = Product.objects.all().filter(is_availabel=True)
+
+        product_count = products.count()
 
     context = {
         "products": products,
