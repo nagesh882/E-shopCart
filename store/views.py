@@ -30,3 +30,20 @@ def storePage(request, category_slug=None):
     print(f"Total Product Count: {product_count}")
 
     return render(request, 'store/storePage.html', context)
+
+
+
+def product_detail(request, category_slug, product_slug):
+
+    try:
+        single_product = Product.objects.get(category__category_slug=category_slug, product_slug=product_slug)
+    except Exception as e:
+        raise e
+
+    print(f"Product Name: {single_product.product_name}")
+
+    context = {
+        "single_product": single_product    
+    }
+
+    return render(request, "store/product_detail.html", context)
