@@ -1,38 +1,120 @@
-1. category app =>
-class category =>
-fields =>
-category id (every time write)
-category name (unique)
-slug (unique)
-description
-category image
+**Monday** 03/06/2024
 
+1. category app =>
+	class category =>
+		fields =>
+			category id (every time write)
+			category name (unique)
+			category slug (unique)
+			description
+			category image
 
 2. account app =>
-create custom user model
-class account =>
-fields =>
-first name
-last name
-username (unique)
-email (unique)
-phone number
-date joined
-last login
-is admin
-is staff
-is admin
-is superuser
+	create custom user model
+	class account =>
+		fields =>
+			first name
+			last name
+			username (unique)
+			email (unique)
+			phone number
+			date joined
+			last login
+			is admin
+			is staff
+			is admin
+			is superuser
 
-** login with email instead of username (Important)
-** required fields username, first name and last name
-** give permissions to account users (has_perm, has_module_perms)
-** create superadmin model (account manager)
-** register AUTH_USER_MODEL in settigns file
+	** login with email instead of username (Important)
+	** required fields username, first name and last name
+	** give permissions to account users (has_perm, has_module_perms)
+	** create super admin model (account manager)
+	** register AUTH_USER_MODEL in settings file
 
 
 3. make password field as read only and it not be changeable
-** achive by this django class django.contrib.auth.admin.UserAdmin
-
+	** achieve by this django class django.contrib.auth.admin.UserAdmin
 
 4. configure Media Files and their Roots
+
+
+
+
+**Tuesday** 04/06/2024
+
+
+1. created a store app
+2. Product model written in store app
+3. created the store page in store folder
+4. store - views.py written
+5. store - urls.py written
+6. category - views.py written
+7. category - urls.py written
+8. category data added 
+9. products data added
+
+
+
+**Wednesday** 05/06/2024
+
+
+1. Display Product data in home Page
+2. Display Product data in store Page
+3. displayed dynamic product data as per the categories 
+4. Displayed the all categories in header page and store page with their URL using context processors and creating get URL method with reverse class
+5. Product detail page added and also rendered their dynamic data of every single product
+6. applied URL on every product photos and their product name which goes to on single product page  
+7. also written pagination views and render them in store page
+
+
+
+
+**Thursday** 06/06/2024
+
+1. show the out of stock product
+2. create carts app
+3. render the cart page using cart function also write their view and URL
+4. create cart and cart item model in carts app
+5. cart model fields are ==>
+	1. cart id
+	2. date added
+6. cart Item model fields are ==>
+	1. cart item id
+	2. product => foreign key of Product it is CASCADE
+	3. cart => foreign key of Cart  it is CASCADE
+	4. quantity
+	5. is active => Boolean default true
+7. register cart and cart item model for admin panel
+8. using session key (session id) add Add cart functionality ==>
+	** create add cart function in carts app view pass product id as parameter and get product
+	** get cart by cart id using session id (get the cart using the cart id present in the session)
+	** if not cart then create cart using create cart id equal to private function call pass argument as request inside the function call after save them cart
+	** for getting session id create another function as private function of cart id and get session id using session key (request.session.session_key)
+	** if not session id then create session id using (session.create()) method then return cart
+	** we have cart and product
+	** combine cart and product in cart item
+	** get cart item from product and cart 
+	** we want the cart item quantity incremented by one when we click on the add to cart then it should be increment their quantity so increment cart item quantity by one
+	** after incrementing the cart item quantity then save the cart item
+	** In case of cart item does not exist we will create new cart item so the quantity is one use create product, cart and quantity is one
+	** after creating cart item save them
+	** once the all function is done then we will redirect to cart page
+	** write an URL for add cart function and also provide product id in URL
+	** apply the dynamic URL of add cart on add to cart button in product detail page and also provide product id
+9. create a cart view (function) for getting total quantity and cart item(initial value is None) ==>
+	** get cart using private function call
+	** filter the cart item with the help of cart which is we define above and is active equal to true
+	** for cart item in cart items:
+		total += (cart_item.product.price * cart_item.quanity)
+		quantity += cart_item.quantity
+	** context is total, quantity, and cart items
+10. Display the data in cart page ==>
+	** apply for loop for cart item in cart page
+	** set image of product, title of product, dynamic cart item quantity, sub total(it convert price * number of quantity), single price of product, total price in checkout
+	** define sub total function in carts models.py file return the value of sub total (product price * quantity)
+	** set plus button (increment button) using ancher tag with add_cart url and cart_item.product.product_id
+11. calculate tax and grand total in checkout in cart view (function)
+	** calculate tax using this (2 * total)/100
+	** calculate grand total using this (total + tax)
+	** provide this value in context
+	** render the above value in cart page
