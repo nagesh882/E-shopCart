@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from store.models import Product
 from category.models import Category
+from django.core.paginator import Paginator
 # Create your views here.
 
 
@@ -14,20 +15,34 @@ def storePage(request, category_slug=None):
         
         products = Product.objects.filter(category=categories, is_availabel=True)
 
+        paginator = Paginator(products, 1)
+        page_number = request.GET.get('page')
+        page_object = paginator.get_page(page_number) 
+
         product_count = products.count()
         
     else:
-        products = Product.objects.all().filter(is_availabel=True)
+        products = Product.objects.all().filter(is_availabel=True).order_by('product_id')
 
+        paginator = Paginator(products, 3)
+        page_number = request.GET.get('page')
+        page_object = paginator.get_page(page_number) 
+        
         product_count = products.count()
 
     context = {
         "products": products,
+        "page_object" : page_object,
         "product_count": product_count
     }
 
+    print("=" * 100)
     print(f"Product Names: {[ product.product_name for product in products ]}")
+    print("*"*100)
     print(f"Total Product Count: {product_count}")
+    print("*"*100)
+    print(f"Page Object: {page_object}")
+    print("=" * 100)
 
     return render(request, 'store/storePage.html', context)
 
@@ -40,7 +55,9 @@ def product_detail(request, category_slug, product_slug):
     except Exception as e:
         raise e
 
+    print("=" * 100)
     print(f"Product Name: {single_product.product_name}")
+    print("=" * 100)
 
     context = {
         "single_product": single_product    

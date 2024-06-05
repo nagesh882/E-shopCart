@@ -128,39 +128,70 @@
                 </header><!-- sect-heading -->
 
                 <div class="row">
-                    {% for product in products %}
-                        <div class="col-md-4">
-                            <figure class="card card-product-grid">
-                                <div class="img-wrap"> 
-                                    
-                                    <img src="{{ product.product_image.url }}">
-                                    
-                                </div> <!-- img-wrap.// -->
-                                <figcaption class="info-wrap">
-                                    <div class="fix-height">
-                                        <a href="./product-detail.html" class="title">{{ product.product_name }}</a>
-                                        <div class="price-wrap mt-2">
-                                            <span class="price">{{ product.price }}</span>
-                                            <del class="price-old">$1280</del>
-                                        </div> <!-- price-wrap.// -->
-                                    </div>
-                                    <a href="#" class="btn btn-block btn-primary">Add to cart </a>
-                                </figcaption>
-                            </figure>
-                       </div> <!-- col.// -->
-                    {% endfor %}
+                    {% comment %} {% for product in products %} {% endcomment %}
+
+                    {% comment %} I have apply here paginator object {% endcomment %}
+                    
+                    {% if page_object %}
+                        
+                        {% for product in page_object %}
+                            <div class="col-md-4">
+                                <figure class="card card-product-grid">
+                                    <div class="img-wrap"> 
+                                        
+                                        <a href="{{ product.get_url }}"> <img src="{{ product.product_image.url }}"> </a>
+                                        
+                                    </div> <!-- img-wrap.// -->
+                                    <figcaption class="info-wrap">
+                                        <div class="fix-height">
+                                            <a href="{{ product.get_url }}" class="title">{{ product.product_name }}</a>
+                                            <small> {{ product.stock }} Stocks Available </small>
+                                            <div class="price-wrap mt-2">
+                                                <span class="price"> &#8377; {{ product.price }} </span>
+                                            </div> <!-- price-wrap.// -->
+                                        </div>
+                                        <a href="#" class="btn btn-block btn-primary"> Add to cart </a>
+                                    </figcaption>
+                                </figure>
+                            </div> <!-- col.// -->
+                        {% endfor %}
+                    {% else %}
+                            <div>
+                                <h2> No result found. Please try again. </h2>
+                            </div>
+                    {% endif %}
                 </div> 
                 <!-- row end.// -->
 
 
+                
+                <!-- I have use Paginator -->
                 <nav class="mt-4" aria-label="Page navigation sample">
                     <ul class="pagination">
-                        <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                        {% if page_object.has_previous %}
+                            <li class="page-item"><a class="page-link" href="?page={{ page_object.previous_page_number }}">Previous</a></li>
+                        {% else %}
+                            <li class="page-item disabled"><a class="page-link disabled" href="#">Previous</a></li>
+                        {% endif %}
+
+                        {% for pages in page_object.paginator.page_range %}
+                            {% if page_object.number == pages %}
+                                <li class="page-item active"><a class="page-link" href="#">{{ pages }}</a></li>
+                            {% else %}
+                                <li class="page-item"><a class="page-link" href="?page={{ pages }}">{{ pages }}</a></li>
+
+                            {% endif %}
+
+                        {% endfor %}
+                        
+
+                        {% if page_object.has_next %}
+                            <li class="page-item"><a class="page-link" href="?page={{ page_object.next_page_number }}">Next</a></li>
+                        {% else %}
+                            <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+                        {% endif %}
                     </ul>
+                    
                 </nav>
 
             </main> <!-- col.// -->
@@ -171,11 +202,6 @@
   </section>
 
   <!-- ========================= SECTION CONTENT END// ========================= -->
-
-
-
-
-
 
 
 {% endblock content %}
