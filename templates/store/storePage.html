@@ -1,6 +1,8 @@
+{% extends "base.html" %}
 
+{% load static %}
 
-
+{% block content %}
 
 <!-- ========================= SECTION PAGETOP ========================= -->
 <section class="section-pagetop bg">
@@ -133,7 +135,7 @@
                         <figure class="card card-product-grid">
                             <div class="img-wrap"> 
                                 
-                                <img src="images/items/1.jpg">
+                                <img src="{% static 'images/items/1.jpg' %}">
                                 
                             </div> <!-- img-wrap.// -->
                             <figcaption class="info-wrap">
@@ -152,7 +154,7 @@
                     <div class="col-md-4">
                         <figure class="card card-product-grid">
                             <div class="img-wrap"> 
-                                <img src="images/items/2.jpg">
+                                <img src="{% static 'images/items/2.jpg' %}">
                                 
                             </div> <!-- img-wrap.// -->
                             <figcaption class="info-wrap">
@@ -170,7 +172,7 @@
                     <div class="col-md-4">
                         <figure class="card card-product-grid">
                             <div class="img-wrap"> 
-                                <img src="images/items/3.jpg">
+                                <img src="{% static 'images/items/3.jpg' %}">
                                 
                             </div> <!-- img-wrap.// -->
                             <figcaption class="info-wrap">
@@ -188,7 +190,7 @@
                     <div class="col-md-4">
                         <figure class="card card-product-grid">
                             <div class="img-wrap"> 
-                                <img src="images/items/4.jpg">
+                                <img src="{% static 'images/items/4.jpg' %}">
                                 
                             </div> <!-- img-wrap.// -->
                             <figcaption class="info-wrap">
@@ -206,7 +208,7 @@
                     <div class="col-md-4">
                         <figure class="card card-product-grid">
                             <div class="img-wrap"> 
-                                <img src="images/items/5.jpg">
+                                <img src="{% static 'images/items/5.jpg' %}">
                                 
                             </div> <!-- img-wrap.// -->
                             <figcaption class="info-wrap">
@@ -224,7 +226,7 @@
                     <div class="col-md-4">
                         <figure class="card card-product-grid">
                             <div class="img-wrap"> 
-                                <img src="images/items/6.jpg">
+                                <img src="{% static 'images/items/6.jpg' %}">
                                 
                             </div> <!-- img-wrap.// -->
                             <figcaption class="info-wrap">
@@ -242,7 +244,7 @@
                     <div class="col-md-4">
                         <figure class="card card-product-grid">
                             <div class="img-wrap"> 
-                                <img src="images/items/7.jpg">
+                                <img src="{% static 'images/items/7.jpg' %}">
                                 
                             </div> <!-- img-wrap.// -->
                             <figcaption class="info-wrap">
@@ -260,7 +262,7 @@
                     <div class="col-md-4">
                         <figure class="card card-product-grid">
                             <div class="img-wrap"> 
-                                <img src="images/items/1.jpg">
+                                <img src="{% static 'images/items/1.jpg' %}">
                                 
                             </div> <!-- img-wrap.// -->
                             <figcaption class="info-wrap">
@@ -292,5 +294,14 @@
         </div>
 
     </div> <!-- container .//  -->
-</section>
-<!-- ========================= SECTION CONTENT END// ========================= -->
+  </section>
+
+  <!-- ========================= SECTION CONTENT END// ========================= -->
+
+
+
+
+
+
+
+{% endblock content %}
