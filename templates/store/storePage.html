@@ -150,7 +150,16 @@
                                                 <span class="price"> &#8377; {{ product.price }} </span>
                                             </div> <!-- price-wrap.// -->
                                         </div>
-                                        <a href="#" class="btn btn-block btn-primary"> Add to cart </a>
+                                        {% if product.stock <= 0 %}
+
+                                           <p style='color:red;'>Out of stock</p>
+
+                                        {% else %}
+
+                                           <a href="#" class="btn btn-block btn-primary"> Add to cart </a>
+
+                                        {% endif %}
+                                        
                                     </figcaption>
                                 </figure>
                             </div> <!-- col.// -->

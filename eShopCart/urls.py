@@ -9,6 +9,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.homePage, name="homePage"),
     path('store/', include('store.urls')),
+    path('cart/', include('carts.urls')),
     
 ]
 
