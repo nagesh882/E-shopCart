@@ -67,6 +67,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'category.context_processors.menu_links', # this link we can use everyware in templates
+                'carts.context_processors.cart_counter', # this link we can use everyware in templates
             ],
         },
     },
