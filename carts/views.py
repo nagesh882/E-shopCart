@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from store.models import Product
+from store.models import Product, Variation
 from carts.models import Cart, CartItem
 from django.http import HttpResponse
 from django.core.exceptions import ObjectDoesNotExist
@@ -22,12 +22,21 @@ def _cart_id(request):
 
 def add_to_cart(request, product_id):
 
-    if request.method == "POST":
-        color = request.POST["color"]
-        size = request.POST["size"]
-        print(f"color: {color} | size: {size}")
-
     product = Product.objects.get(product_id=product_id) # get the product using product id
+    product_variations = []
+
+
+    if request.method == "POST":
+        for item in request.POST:
+            key = item
+            value = request.POST[key]
+
+            try:
+                variation = Variation.objects.get(product=product, variation_category__iexact=key, variation_value__iexact=value)
+                product_variations.append(variation)
+            except:
+                pass
+
 
     # print(f"Product Name: {product.product_name}") #for testing purpose
 
