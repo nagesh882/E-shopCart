@@ -5,6 +5,7 @@ from django.core.paginator import Paginator
 from carts.models import Cart, CartItem
 from carts.views import _cart_id
 from django.http import HttpResponse
+from django.db.models import Q
 # Create your views here.
 
 
@@ -35,7 +36,7 @@ def storePage(request, category_slug=None):
 
     context = {
         "products": products,
-        "page_object" : page_object,
+        "products" : page_object,
         "product_count": product_count
     }
 
@@ -44,7 +45,7 @@ def storePage(request, category_slug=None):
     # print("*"*100)
     # print(f"Total Product Count: {product_count}")
     # print("*"*100)
-    # print(f"Page Object: {page_object}")
+    # print(f"Page Object: {products}")
     # print("=" * 100)
 
     return render(request, 'store/storePage.html', context)
@@ -75,4 +76,16 @@ def product_detail(request, category_slug, product_slug):
 
 
 def search(request):
-    return HttpResponse("Search is working")
+
+    if 'keyword' in request.GET:
+        keyword = request.GET['keyword']
+        if keyword:
+            products = Product.objects.order_by('-created_date').filter(Q(description__icontains=keyword) | Q(product_name__icontains=keyword))
+            product_count = products.count()
+
+    context = {
+        "products": products,
+        "product_count": product_count
+    }
+
+    return render(request, 'store/storePage.html', context)
