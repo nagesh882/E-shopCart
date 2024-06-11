@@ -16,7 +16,7 @@ def storePage(request, category_slug=None):
     if category_slug != None:
         categories = Category.objects.get(category_slug=category_slug)
         
-        products = Product.objects.filter(category=categories, is_availabel=True)
+        products = Product.objects.filter(category=categories, is_availabel=True).order_by('product_id')
 
         paginator = Paginator(products, 1)
         page_number = request.GET.get('page')
@@ -39,13 +39,13 @@ def storePage(request, category_slug=None):
         "product_count": product_count
     }
 
-    print("=" * 100)
-    print(f"Product Names: {[ product.product_name for product in products ]}")
-    print("*"*100)
-    print(f"Total Product Count: {product_count}")
-    print("*"*100)
-    print(f"Page Object: {page_object}")
-    print("=" * 100)
+    # print("=" * 100)
+    # print(f"Product Names: {[ product.product_name for product in products ]}")
+    # print("*"*100)
+    # print(f"Total Product Count: {product_count}")
+    # print("*"*100)
+    # print(f"Page Object: {page_object}")
+    # print("=" * 100)
 
     return render(request, 'store/storePage.html', context)
 
@@ -61,9 +61,9 @@ def product_detail(request, category_slug, product_slug):
     except Exception as e:
         raise e
 
-    print("=" * 100)
-    print(f"Product Name: {single_product.product_name}")
-    print("=" * 100)
+    # print("=" * 100)
+    # print(f"Product Name: {single_product.product_name}")
+    # print("=" * 100)
 
     context = {
         "single_product": single_product,

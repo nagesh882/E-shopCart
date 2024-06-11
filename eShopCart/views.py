@@ -9,8 +9,8 @@ def homePage(request):
         "products": products    
     }
 
-    print("=" * 100)
-    print(f"Product Names: {[ product.product_name for product in products ]}")
-    print("=" * 100)
+    # print("=" * 100)
+    # print(f"Product Names: {[ product.product_name for product in products ]}")
+    # print("=" * 100)
 
     return render(request, "homePage.html", context)

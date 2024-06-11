@@ -14,16 +14,23 @@ def _cart_id(request):
     if not cart:
         cart = request.session.create()
     
-    print(f"cart id | session id(key): {cart}") # for testing purpose
+    # print(f"cart id | session id(key): {cart}") # for testing purpose
     
     return cart
 
 
 
 def add_to_cart(request, product_id):
+
+    color = request.GET["color"]
+    size = request.GET["size"]
+    return HttpResponse(color + " " + size)
+    exit()
+
+
     product = Product.objects.get(product_id=product_id) # get the product using product id
 
-    print(f"Product Name: {product.product_name}") #for testing purpose
+    # print(f"Product Name: {product.product_name}") #for testing purpose
 
 
     try:
@@ -37,7 +44,7 @@ def add_to_cart(request, product_id):
         )
         cart.save()
 
-    print(f"Cart Id: {cart}") # for testing purpose
+    # print(f"Cart Id: {cart}") # for testing purpose
 
 
     try:
@@ -80,7 +87,7 @@ def remove_cart(request, product_id):
     else:
         cart_item.delete()
     
-    print(f"cart item: {cart_item.quantity}")
+    # print(f"cart item: {cart_item.quantity}")
 
     return redirect("cart")
 
