@@ -128,7 +128,7 @@
 4. add dashbord, register and signin page
 
 
-**Wednesday** 08/06/2024
+**Wednesday** 12/06/2024
 
 1. check the static value from page put a color and size variation inside the form thet give you GET request
 2. we are using achore tag for the add to cart insted of this use button for the form
