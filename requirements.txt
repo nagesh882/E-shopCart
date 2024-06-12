@@ -118,3 +118,41 @@
 	** calculate grand total using this (total + tax)
 	** provide this value in context
 	** render the above value in cart page
+
+
+**Friday** 07/06/2024
+
+1. create dynamic add to cart page with increment cart
+2. add cart remove, cart item remove and cart counter functionalities
+3. add view details button and pagination improvement
+4. add dashbord, register and signin page
+
+
+**Wednesday** 08/06/2024
+
+1. check the static value from page put a color and size variation inside the form thet give you GET request
+2. we are using achore tag for the add to cart insted of this use button for the form
+3. provide action url add to cart with product id
+4. show the static value of color and size using select and option tag and get that data at backend and render it through the HttpResponse on display
+5. create variation model inside the store app/models.py
+6. create model with variation name
+	variation category choice => color and size
+	fields are =>
+		1. variation id => primary key
+		2. product => foreign key of product model
+		3. variation category => char field => constrains => choices => variation category choice
+		4. variation value field should be charfield
+		5. is active should be Boolean field set default is true
+		6. created date should be datetimefield it auto now is true
+7. register admin panel with list display, list editable(is active) and list filter(product, variation category, variation value)
+8. fetch dynamic color of product variation in product detail page
+9. create variation manager for variation model that can handel color and size variation separately
+10. create class as name  variation manager it should inherit from models as models.Manager
+11. create two methods for color and size variations
+12. return the value with super(VariationManager, self) function that can filter the value variation category as per the color and size with is action should be true
+13. get instance of product variations
+14. get instance of product variation inside the cart item and also set admin for cart and cart item model with the help of variation manager
+15. also fetch dynamic size variation of product variation in product detail page
+16. add search functionality also write their view and url
+17. check keyword from search with request.GET if your get keyword then filter the product as per the keyword in product description and product name
+18. after getting product filter render their dynamic value in storePage
