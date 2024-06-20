@@ -7,12 +7,12 @@
 	<section class="section-content padding-y">
 
 		<!-- ============================ COMPONENT REGISTER   ================================= -->
-		<div class="card mx-auto" style="max-width:520px; margin-top:40px;">
-			<article class="card-body">
-				<header class="mb-4"><h4 class="card-title">Sign up</h4></header>
-				<form action="" method="POST">
-					{% csrf_token %}
-					<div class="form-row">
+			<div class="card mx-auto" style="max-width:520px; margin-top:40px;">
+				<article class="card-body">
+					<header class="mb-4"><h4 class="card-title">Sign up</h4></header>
+					<form action="{% url 'register' %}" method="POST">
+						{% csrf_token %}
+						<div class="form-row">
 							{% for register_form in form %}
 								<div class="col-6 form-group">
 									<label for="{{register_form.id_for_label}}">{{register_form.label}}</label>
@@ -20,17 +20,17 @@
 								</div> <!-- form-group end.// -->
 							{% endfor %}
 						</div> <!-- form-row end.// -->
-					<div class="form-group">
-						<button type="submit" class="btn btn-primary btn-block"> Register  </button>
-					</div> <!-- form-group// -->      						
-				</form>
-				{{form.non_field_errors}}
-			</article><!-- card-body.// -->
-		</div> <!-- card .// -->
-		<p class="text-center mt-4">Have an account? <a href="{% url 'signin' %}">Log In</a></p>
-		<br><br>
+						<div class="form-group">
+							<button type="submit" class="btn btn-primary btn-block"> Register  </button>
+						</div> <!-- form-group// -->      						
+					</form>
+					{{form.non_field_errors}}
+				</article><!-- card-body.// -->
+			</div> <!-- card .// -->
+			<p class="text-center mt-4">Have an account? <a href="{% url 'signin' %}">Log In</a></p>
+			<br><br>
 		
-		<!-- ============================ COMPONENT REGISTER  END.// ================================= -->
+		<!-- ====================== COMPONENT REGISTER  END.// ========================== -->
 
 
 	</section>

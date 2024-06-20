@@ -5,7 +5,7 @@ from account.models import Account
 
 class RegistrationForm(forms.ModelForm):
 
-    set_password = forms.CharField(label='Set Password', 
+    password = forms.CharField(label='Set Password', 
         widget=forms.PasswordInput(attrs={
             'placeholder':'Enter password',
             'class':'form-control'
@@ -22,7 +22,7 @@ class RegistrationForm(forms.ModelForm):
 
     class Meta:
         model = Account
-        fields = ['first_name', 'last_name', 'email', 'phone_number']
+        fields = ['first_name', 'last_name', 'email', 'phone_number', 'password']
         labels = {
             'phone_number':'Phone',
             'first_name': 'First Name',
@@ -47,7 +47,7 @@ class RegistrationForm(forms.ModelForm):
     def clean(self):
         cleaned_data = super(RegistrationForm, self).clean()
 
-        password = cleaned_data['set_password']
+        password = cleaned_data['password']
         confirm_password = cleaned_data['confirm_password']
 
         if password != confirm_password:
