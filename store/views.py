@@ -89,3 +89,8 @@ def search(request):
     }
 
     return render(request, 'store/storePage.html', context)
+
+
+
+def dashboard(request):
+    return render(request, 'accounts/dashboard.html')
