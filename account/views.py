@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from account.forms import RegistrationForm
 from account.models import Account
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -54,7 +55,10 @@ def sign_in(request):
     return render(request, 'accounts/signin.html')
 
 
+@login_required(login_url='signout')
 def sign_out(request):
+    logout(request)
+    # request.session.flush()
     return redirect('homePage')
 
 

@@ -73,7 +73,7 @@
                                 <small class="title text-muted">Welcome <span style="font-weight: bold; color: rgb(44, 44, 44);">{{user.first_name | capfirst}}!</span></small>
                                 <div> 
                                     <a href="{% url 'signin' %}">Dashboard</a> <span class="dark-transp"> | </span>
-                                    <a href="{% url 'register' %}"> Logout</a>
+                                    <a href="{% url 'signout' %}"> Logout</a>
                                 </div>
                             </div>
                         {% endif %}
