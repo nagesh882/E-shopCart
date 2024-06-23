@@ -55,21 +55,44 @@ def add_to_cart(request, product_id):
     # print(f"Cart Id: {cart}") # for testing purpose
 
 
-    try:
-        cart_item = CartItem.objects.get(
+    is_cart_exists = CartItem.objects.filter(product=product, cart=cart).exists()
+    if is_cart_exists:
+        cart_item = CartItem.objects.filter(
             product = product,
             cart = cart
         )
-        if len(product_variations) > 0:
-            cart_item.variations.clear()
-            for item in product_variations:
-                cart_item.variations.add(item)
+        # existing_variations -> database 
+        # current variation -> product_variation
+        # item_id -> database
+        ex_var_list = []
+        carts_id = []
+        for item in cart_item:
+            existing_variation = item.variations.all()
+            ex_var_list.append(list(existing_variation))
+            carts_id.append(item.cart_item_id)
 
-        cart_item.quantity += 1
-        
-        cart_item.save()
+        print(ex_var_list)
 
-    except CartItem.DoesNotExist:
+        if product_variations in ex_var_list:
+            # increase the cart item quantity
+            index = ex_var_list.index(product_variations)
+            item_id = carts_id[index]
+            iteam = CartItem.objects.get(product=product, cart_item_id=item_id)
+            iteam.quantity += 1
+            iteam.save()
+
+        else:
+            # create new cart item
+            item = CartItem.objects.create(product=product, quantity=1, cart=cart)
+
+
+            if len(product_variations) > 0:
+                item.variations.clear()
+                item.variations.add(*product_variations)
+                # cart_item.quantity += 1
+            item.save()
+
+    else:
         cart_item = CartItem.objects.create(
             product = product,
             quantity = 1,
@@ -77,9 +100,7 @@ def add_to_cart(request, product_id):
         )
         if len(product_variations) > 0:
             cart_item.variations.clear()
-            for item in product_variations:
-                cart_item.variations.add(item)
-        
+            cart_item.variations.add(*product_variations)
         cart_item.save()
 
     # return HttpResponse(cart_item.product)
