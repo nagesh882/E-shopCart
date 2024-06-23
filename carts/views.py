@@ -152,8 +152,8 @@ def cart(request, total=0, quantity=0, cart_items=None):
         "total": total,
         "quantity" : quantity,
         "cart_items": cart_items,
-        "tax": tax,
-        "grand_total": grand_total
+        "tax": math.ceil(tax), # tax value shoud be round of
+        "grand_total": math.ceil(grand_total)  # grand total value should be 
     }
 
     return render(request, 'store/cartPage.html', context)
